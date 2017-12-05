@@ -7,7 +7,8 @@ namespace Entity;
  *
  * @author Etudiant
  */
-class Loaning {
+class Loaning
+{
 
     /**
      * iD of loaning
@@ -39,51 +40,60 @@ class Loaning {
      */
     private $user;
 
-     function getId() {
+    function getId()
+    {
         return $this->id;
     }
 
-     function getDateStart() {
+    function getDateStart()
+    {
         return $this->dateStart;
     }
 
-     function getDateEnd() {
+    function getDateEnd()
+    {
         return $this->dateEnd;
     }
 
-     function getGame() {
+    function getGame()
+    {
         return $this->game;
     }
 
-     function getUser() {
+    function getUser()
+    {
         return $this->user;
     }
 
-     function setId($id) {
+    function setId($id)
+    {
         $this->id = $id;
     }
 
-     function setDateStart($dateStart) {
-        if($dateStart instanceof string) {
+    function setDateStart($dateStart)
+    {
+        if ($dateStart instanceof string) {
             $dateStart = \DateTime::createFromFormat("Y/m/d", $dateStart);
-        }        
+        }
         $this->dateStart = $dateStart;
     }
 
-     function setDateEnd($dateEnd) {
-        if($dateEnd instanceof string) {
+    function setDateEnd($dateEnd)
+    {
+        if ($dateEnd instanceof string) {
             $dateEnd = \DateTime::createFromFormat("Y/m/d", $dateEnd);
-        }        
+        }
         $this->dateEnd = $dateEnd;
     }
 
-     function setGame($game) {
+    function setGame($game)
+    {
         $this->game = $game;
     }
 
-     function setUser($user) {
+    function setUser($user)
+    {
         $this->user = $user;
     }
 
-    
 }

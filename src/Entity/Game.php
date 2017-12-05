@@ -7,7 +7,8 @@ namespace Entity;
  *
  * @author Etudiant
  */
-class Game {
+class Game
+{
 
     /**
      * iD of game
@@ -39,47 +40,54 @@ class Game {
      */
     private $category;
 
-    
-     function getId() {
+    function getId()
+    {
         return $this->id;
     }
 
-     function getTitle() {
+    function getTitle()
+    {
         return $this->title;
     }
 
-     function getImage() {
+    function getImage()
+    {
         return $this->image;
     }
 
-     function getUser() {
+    function getUser()
+    {
         return $this->user;
     }
 
-     function getCategory() {
+    function getCategory()
+    {
         return $this->category;
     }
 
-     function setId($id) {
+    function setId($id)
+    {
         $this->id = $id;
     }
 
-     function setTitle($title) {
+    function setTitle($title)
+    {
         $this->title = $title;
     }
 
-     function setImage($image) {
+    function setImage($image)
+    {
         $this->image = $image;
     }
 
-     function setUser($user) {
+    function setUser($user)
+    {
         $this->user = $user;
     }
 
-     function setCategory($category) {
+    function setCategory($category)
+    {
         $this->category = $category;
     }
-
-
 
 }
