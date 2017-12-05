@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+require __DIR__."/controllers_admin.php";
+
 //Request::setTrustedProxies(array('127.0.0.1'));
 
 $app->before(function() use($app) {
@@ -47,7 +49,12 @@ $app->match('/register', function(Request $request) use ($app) {
     $user = new \Entity\User();
 //    var_dump($user);
     
-    $form = $app['form.factory']->createBuilder(\FormType\UserType::class, $user)
+    $form = $app['form.factory']->createBuilder(\FormType\UserType::class, $user, [
+        "validation_groups" => ["registration"]
+        ])
+        ->add("submit", SubmitType::class, [
+            "label" => "Envoyer"
+        ])
             ->getForm();
     
     $form->handleRequest($request);

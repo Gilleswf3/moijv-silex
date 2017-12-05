@@ -8,6 +8,7 @@ use Silex\Provider\HttpFragmentServiceProvider;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 
+$app = new \App\CustomApp();
 $app = new Application();
 $app->register(new ServiceControllerServiceProvider());
 $app->register(new AssetServiceProvider());
@@ -47,25 +48,31 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => [
+        'admin' => array(
+            'anonymous' => false,
+            'pattern' => '^/admin/',
+//            'http' => true,
+            'form' => array(
+                'login_path' => '/loginadmin',
+                'check_path' => '/admin/login_check',
+                "always_use_default_target_path" => true,
+                "default_target_path" => "/admin/dashboard",
+                ),
+            'logout' => array('logout_path' => '/admin/logoutadmin', 'invalidate_session' => true),
+            'users' => function() use ($app) {
+                return $app["admins.dao"];
+            },
+        ),
         'front' => array(
             'pattern' => '^/',
             'http' => true,
             'anonymous' => true,
             'form' => array('login_path' => '/login', 'check_path' => '/login_check'),
-            'logout' => array('logout_path' => '/logout', 'invalidate_session' => "true"),
+            'logout' => array('logout_path' => '/logout', 'invalidate_session' => true),
             'users' => function () use ($app) {
                 return $app["users.dao"];
             }
-        ),
-                
-        'admin' => array(
-            'pattern' => '^/admin/',
-            'http' => true,
-            'form' => array('login_path' => '/loginadmin', 'check_path' => '/admin/login_check'),
-            'users' => function() use ($app) {
-                return $app["admins.dao"];
-            }
-        ),
+        ),                
     ]
 ));
 

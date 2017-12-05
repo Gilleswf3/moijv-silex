@@ -13,7 +13,13 @@ class AdminDAO extends UserDAO
 {
     protected $tableName = "user";
 
-    public function loadUserByUsername($username)
+    public function __construct(\PDO $db)
+    {
+        parent::__construct($db, "user");
+        $this->entityClassName = "\Entity\User";
+    }
+
+        public function loadUserByUsername($username)
     {
 //        SELECT * FROM user WHERE username = ? LIMIT 1
 //        bindValue(1,$username)
